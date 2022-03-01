@@ -5,16 +5,23 @@ from main import app
 
 client = TestClient(app)
 
-def test_call_test_api():
+def test_call_test_input_year_api():
     input = "2540"
     output = 25
     response = client.get("/service/getage?year="+input)
     assert response.status_code == 200
     assert response.json() == {"age": output}
 
-# def test_call_api():
-#     input = "A"
-#     output = "no"
-#     response = client.get("/service/getage/str?year="+input)
-#     assert response.status_code == 200
-#     assert response.json() == {"age": input + output}
+def test_call_test_input_zero_api():
+    input = "0"
+    output = "Can't input less than zero"
+    response = client.get("/service/getage?year="+input)
+    assert response.status_code == 200
+    assert response.json() == {"age": output}
+
+def test_call_test_input_year_a_api():
+    input = "2566"
+    output = "Can't input less than zero"
+    response = client.get("/service/getage?year="+input)
+    assert response.status_code == 200
+    assert response.json() == {"age": output}
