@@ -5,23 +5,30 @@ from main import app
 
 client = TestClient(app)
 
-def test_call_test_input_year_api():
+def test_test_input_year_api():
     input = "2540"
     output = 25
     response = client.get("/service/getage?year="+input)
     assert response.status_code == 200
     assert response.json() == {"age": output}
 
-def test_call_test_input_zero_api():
+def test_test_input_zero_api():
     input = "0"
-    output = "Can't input less than zero"
+    output = "years not less than 0"
     response = client.get("/service/getage?year="+input)
     assert response.status_code == 200
-    assert response.json() == {"age": output}
+    assert response.json() == {"msg": output}
 
-def test_call_test_input_year_a_api():
+def test_test_year_unable_calculate_api():
     input = "2566"
-    output = "Can't input less than zero"
+    output = "unable to calculate"
     response = client.get("/service/getage?year="+input)
     assert response.status_code == 200
-    assert response.json() == {"age": output}
+    assert response.json() == {"msg": output}
+
+def test_test_year_Underflow_api():
+    input = "-1"
+    output = "years not less than 0"
+    response = client.get("/service/getage?year="+input)
+    assert response.status_code == 200
+    assert response.json() == {"msg": output}
