@@ -5,8 +5,8 @@ orbs:
 workflows:
   my-workflow:
     jobs:
-      - build-and-test
-          context
+      - build-and-test:
+          context:
             - anything
 jobs:
   build-and-test:
@@ -21,6 +21,6 @@ jobs:
           name: Create ENV
           command: env > .env
       - run: echo ${USER_NAME}
-      - run: 
+      - run:
           name: Run tests
           command: python -m pytest
