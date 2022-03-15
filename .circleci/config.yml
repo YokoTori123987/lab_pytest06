@@ -3,9 +3,11 @@ orbs:
   python: circleci/python@1.4.0
 
 workflows:
-  sample:
+  my-workflow:
     jobs:
       - build-and-test
+          context
+            - anything
 jobs:
   build-and-test:
     docker:
@@ -16,5 +18,9 @@ jobs:
           pkg-manager: pip
       - run: pip install pytest requests
       - run:
+          name: Create ENV
+          command: env > .env
+      - run: echo ${USER_NAME}
+      - run: 
           name: Run tests
           command: python -m pytest
