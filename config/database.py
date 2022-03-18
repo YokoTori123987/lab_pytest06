@@ -8,6 +8,6 @@ client = MongoClient("mongodb+srv://"+config.settings.user_name+":"+config.setti
 
 db = client.todo_app
 
-collection_name = db["todos_app"]
+collection_name = db[""]
 students_collection = db["students"]
 courses_collection = db["courses"]
